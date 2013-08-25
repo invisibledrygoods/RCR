@@ -1,0 +1,11 @@
+{ 
+  "infect": "RCR/Assets",
+  "with": {
+    "invisibledrygoods/Points": "HEAD",
+    "invisibledrygoods/GivenWhenUnity": "HEAD",
+    "invisibledrygoods/RequireUnity": "HEAD",
+    "invisibledrygoods/Select": "HEAD",
+    "invisibledrygoods/Circuitry": "HEAD",
+    "invisibledrygoods/GizmoTurtle": "HEAD"
+  }
+}
