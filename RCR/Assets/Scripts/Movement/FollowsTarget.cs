@@ -5,7 +5,7 @@ using Require;
 public class FollowsTarget : MonoBehaviour
 {
     public Vector3 target;
-    public float speed;
+    public float speed = 1.0f;
 
     void Update()
     {
