@@ -1,41 +1,57 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using Require;
 
 public class DefaultCharacterState : CircuitComponent
 {
+    public List<CircuitComponent> A;
+    public List<CircuitComponent> B;
+
     Transform module;
     FollowsTarget movement;
+    UsesAxisInput axis;
+    UsesButtonInput buttons;
 
     void Awake()
     {
         module = transform.GetModuleRoot();
         movement = module.Require<FollowsTarget>();
+        axis = module.Require<UsesAxisInput>();
+        buttons = module.Require<UsesButtonInput>();
     }
 
     void Update()
     {
         movement.target = module.position;
-        Debug.Log(Input.GetAxis("Vertical"));
 
-        if (Input.GetAxis("Vertical") > 0.1f)
+        if (axis.Get("Vertical") > 0.1f)
         {
             movement.target += Vector3.forward;
         }
         
-        if (Input.GetAxis("Vertical") < -0.1f)
+        if (axis.Get("Vertical") < -0.1f)
         {
             movement.target -= Vector3.forward;
         }
         
-        if (Input.GetAxis("Horizontal") > 0.1f)
+        if (axis.Get("Horizontal") > 0.1f)
         {
             movement.target += Vector3.right;
         }
         
-        if (Input.GetAxis("Horizontal") < -0.1f)
+        if (axis.Get("Horizontal") < -0.1f)
         {
             movement.target -= Vector3.right;
+        }
+
+        if (buttons.Released("A"))
+        {
+            Spark(A);
+        }
+
+        if (buttons.Released("B"))
+        {
+            Spark(B);
         }
     }
 
