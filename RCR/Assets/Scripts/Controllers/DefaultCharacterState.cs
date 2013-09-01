@@ -55,6 +55,11 @@ public class DefaultCharacterState : CircuitComponent
         }
     }
 
+    void OnDisable()
+    {
+        movement.target = module.position;
+    }
+
     void OnDrawGizmos()
     {
         GizmoTurtle turtle = new GizmoTurtle(transform.position);
