@@ -10,7 +10,16 @@ public class AttackState : CircuitComponent
     public float durationInSeconds;
     public GameObject hitbox;
 
+    public string costSource;
+    public float costAmount;
+
     float timeoutInSeconds;
+    Transform module;
+
+    public void Awake()
+    {
+        module = transform.GetModuleRoot();
+    }
 
     public void Update()
     {
@@ -29,6 +38,8 @@ public class AttackState : CircuitComponent
             hitbox.SetActive(true);
             timeoutInSeconds = durationInSeconds;
         }
+
+        module.Require<HasPoints>().Deal(costSource, costAmount);
     }
 
     public void OnDisable()
@@ -41,14 +52,15 @@ public class AttackState : CircuitComponent
 
     public void OnDrawGizmos()
     {
+        DrawWires();
+
         if (hitbox != null)
         {
             GizmoTurtle turtle = new GizmoTurtle(transform.position);
             GizmoFont font = new RobotLetters(turtle, 0.4f);
 
+            turtle.PenUp().RotateRight(90).Forward(0.12f).RotateLeft(90).Forward(0.15f);
             font.Write(hitbox.name);
         }
-
-        DrawWires();
     }
 }

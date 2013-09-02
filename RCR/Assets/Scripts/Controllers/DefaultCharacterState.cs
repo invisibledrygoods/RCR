@@ -48,8 +48,7 @@ public class DefaultCharacterState : CircuitComponent
         {
             Spark(A);
         }
-
-        if (buttons.Released("B"))
+        else if (buttons.Released("B"))
         {
             Spark(B);
         }
